@@ -2,11 +2,15 @@ version: 0.1
 
 environment_variables:
   plaintext:
-    key: "value"
+    some_env_value: "some_value"
 
 phases:
   install:
     commands:
+      - sudo apt-get -y update
+      - sudo apt-get -y install zip unzip
+      - pip install --upgrade pip
+
       - pip install boto3
   pre_build:
     commands:
@@ -21,6 +25,6 @@ phases:
       - echo Build completed on `date`
 artifacts:
   files:
-    - ./*
+    - app.zip
   discard-paths: yes
   base-directory: location

@@ -1,0 +1,25 @@
+version: 0.1
+
+environment_variables:
+  plaintext:
+    key: "value"
+
+phases:
+  install:
+    commands:
+      - pip install boto3
+  pre_build:
+    commands:
+      - command
+      - command
+  build:
+    commands:
+      - echo Build started on `date`
+  post_build:
+    commands:
+			- echo Build completed on `date`
+artifacts:
+  files:
+    - ./*
+  discard-paths: yes
+  base-directory: location

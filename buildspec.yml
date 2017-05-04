@@ -13,7 +13,7 @@ phases:
   pre_build:
     commands:
       - sudo apt-get -y update
-      - sudo apt-get -y install docker.io
+      - sudo apt-get -y install docker-ce
       - sudo apt-get -y install python-pip
       - sudo apt-get -y install python3-pip
       - pip install --upgrade --user awscli

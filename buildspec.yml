@@ -16,24 +16,24 @@ phases:
       - sudo apt-get -y install python-pip
       - sudo apt-get -y install python3-pip
       - pip install --upgrade --user awscli
-      - pip install --upgrade --user boto3
-    	- docker info
-      - $(aws ecr get-login --region $AWS_DEFAULT_REGION)
-      - echo pre build completed on: `date`
+			- pip install --upgrade --user boto3
+			- docker info
+			- $(aws ecr get-login --region $AWS_DEFAULT_REGION)
+			- echo pre build completed on: `date`
 	build:
     commands:
-      - echo build started on: `date`
+			- echo build started on: `date`
 			- docker build --rm=false -f Dockerfile_hello -t rnzaws/hello .
 			- docker images
 			- docker tag rnzaws/hello:ebtest 702786411213.dkr.ecr.us-east-1.amazonaws.com/test:ebtest
 			- docker push 702786411213.dkr.ecr.us-east-1.amazonaws.com/test:ebtest
-      - echo build completed on: `date`
+			- echo build completed on: `date`
   post_build:
     commands:
-      - echo post build completed on: `date`
+			- echo post build completed on: `date`
 
 artifacts:
   files:
-    - Dockerrun.aws.json
+		- Dockerrun.aws.json
   discard-paths: yes
   base-directory: ./

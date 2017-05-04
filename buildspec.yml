@@ -29,7 +29,7 @@ phases:
       - echo build started on `date`
       - docker build --rm=false -f Dockerfile_hello -t rnzaws/hello .
       - docker images
-      - docker tag rnzaws/hello:ebtest 702786411213.dkr.ecr.us-east-1.amazonaws.com/test:ebtest
+      - docker tag rnzaws/hello:latest 702786411213.dkr.ecr.us-east-1.amazonaws.com/test:ebtest
       - docker push 702786411213.dkr.ecr.us-east-1.amazonaws.com/test:ebtest
       - echo build completed on `date`
 

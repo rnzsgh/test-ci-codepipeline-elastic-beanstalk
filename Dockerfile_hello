@@ -5,7 +5,7 @@ FROM python:3.5-alpine
 ADD requirements.txt /requirements.txt
 
 RUN set -ex \
-    && apk add --no-cache --virtual .build-deps gcc make libc-dev musl-dev linux-headers pcre-dev postgresql-dev \
+    && apk add --no-cache --virtual .build-deps gcc make libc-dev musl-dev build-base python3-dev py-pip linux-headers pcre-dev postgresql-dev \
     && pyvenv /venv \
     && /venv/bin/pip install -U pip \
     && LIBRARY_PATH=/lib:/usr/lib /bin/sh -c "/venv/bin/pip install --no-cache-dir -r /requirements.txt" \
@@ -19,11 +19,11 @@ RUN mkdir /app/ /static/
 WORKDIR /app/
 ADD app /app/
 
-EXPOSE 80
+EXPOSE 8080
 
 ENV DJANGO_SETTINGS_MODULE=app.settings
 
-ENV UWSGI_VIRTUALENV=/venv UWSGI_WSGI_FILE=app/wsgi.py UWSGI_HTTP=:80 UWSGI_MASTER=1 UWSGI_WORKERS=2 UWSGI_THREADS=8 UWSGI_UID=1000 UWSGI_GID=2000
+ENV UWSGI_VIRTUALENV=/venv UWSGI_WSGI_FILE=app/wsgi.py UWSGI_HTTP=:8080 UWSGI_MASTER=1 UWSGI_WORKERS=2 UWSGI_THREADS=8 UWSGI_UID=1000 UWSGI_GID=2000
 
 RUN DATABASE_URL=none /venv/bin/python manage.py collectstatic --noinput
 

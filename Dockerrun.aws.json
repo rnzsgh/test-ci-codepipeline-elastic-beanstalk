@@ -11,7 +11,31 @@
         }
       ],
       "essential": true,
-      "memory": 128
+      "memory": 128,
+      "portMappings": [
+        {
+          "hostPort": 80,
+          "containerPort": 80
+        }
+      ]
+    },
+    {
+      "name": "processor",
+      "image": "702786411213.dkr.ecr.us-east-1.amazonaws.com/test:ebtest-processor",
+      "environment": [
+        {
+          "name": "AppName",
+          "value": "processor"
+        }
+      ],
+      "essential": true,
+      "memory": 128,
+      "portMappings": [
+        {
+          "hostPort": 8000,
+          "containerPort": 8000
+        }
+      ]
     }
   ]
 }

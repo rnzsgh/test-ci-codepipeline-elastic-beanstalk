@@ -13,9 +13,9 @@ phases:
   pre_build:
     commands:
       - whoami
-      - sudo apt-get -y update
-      - sudo apt-get -y install python-pip
-      - sudo apt-get -y install python3-pip
+      - apt-get -y update
+      - apt-get -y install python-pip
+      - apt-get -y install python3-pip
       - pip install --upgrade --user awscli
       - pip install --upgrade --user boto3
       - docker info

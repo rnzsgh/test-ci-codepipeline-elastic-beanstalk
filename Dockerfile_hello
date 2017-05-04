@@ -15,7 +15,7 @@ RUN set -ex \
     && apk add --virtual .python-rundeps $runDeps \
     && apk del .build-deps
 
-RUN mkdir /app/
+RUN mkdir /app/ /static/
 WORKDIR /app/
 ADD app /app/
 

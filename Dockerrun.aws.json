@@ -1,0 +1,17 @@
+{
+  "AWSEBDockerrunVersion": 2,
+  "containerDefinitions": [
+    {
+      "name": "hello",
+      "image": "702786411213.dkr.ecr.us-east-1.amazonaws.com/test:ebtest",
+      "environment": [
+        {
+          "name": "AppName",
+          "value": "hello"
+        }
+      ],
+      "essential": true,
+      "memory": 128
+    }
+  ]
+}

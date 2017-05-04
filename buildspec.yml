@@ -28,11 +28,13 @@ phases:
     commands:
       - echo build started on `date`
       - docker build --rm=false -f Dockerfile_hello -t rnzaws/hello .
+      - docker build --rm=false -f Dockerfile_processor -t rnzaws/processor .
       - docker images
       - docker tag rnzaws/hello:latest 702786411213.dkr.ecr.us-east-1.amazonaws.com/test:ebtest
       - docker push 702786411213.dkr.ecr.us-east-1.amazonaws.com/test:ebtest
+      - docker tag rnzaws/processor:latest 702786411213.dkr.ecr.us-east-1.amazonaws.com/test:ebtest-processor
+      - docker push 702786411213.dkr.ecr.us-east-1.amazonaws.com/test:ebtest-processor
       - echo build completed on `date`
-
   post_build:
     commands:
       - echo post build completed on `date`

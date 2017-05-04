@@ -13,11 +13,12 @@ phases:
   pre_build:
     commands:
       - sudo apt-get -y update
-      - sudo apt-get -y install docker-ce
+      - sudo apt-get -y install docker.io
       - sudo apt-get -y install python-pip
       - sudo apt-get -y install python3-pip
       - pip install --upgrade --user awscli
       - pip install --upgrade --user boto3
+      - sudo service docker start
       - docker info
       - $(aws ecr get-login --region $AWS_DEFAULT_REGION)
       - echo pre build completed on `date`
@@ -33,6 +34,7 @@ phases:
   post_build:
     commands:
       - echo post build completed on `date`
+      - echo run some more tests
 
 artifacts:
   files:

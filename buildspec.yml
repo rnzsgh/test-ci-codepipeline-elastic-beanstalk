@@ -1,18 +1,6 @@
 ---
 version: 0.1
 
-# http://docs.aws.amazon.com/codebuild/latest/userguide/sample-docker.html#sample-docker-dir
-
-# http://www.awsomeblog.com/aws-elasticbeanstalk-multicontainer-docker-deployment-with-aws-codebuild/#
-#
-#       - apt-get -y update
-#      - apt-get -y install python-pip
-#      - apt-get -y install python3-pip
-#      - pip install --upgrade --user awscli
-#      - pip install --upgrade --user boto3
-
-#
-
 environment_variables:
   plaintext:
     some_env_value: "some_value"
@@ -29,19 +17,20 @@ phases:
       - echo build started on `date`
       - docker build --rm=false -f Dockerfile_web -t rnzaws/web .
       - docker build --rm=false -f Dockerfile_processor -t rnzaws/processor .
+      - echo build completed on `date`
+  post_build:
+    commands:
+      - echo post_build started on `date`
       - docker images
       - docker tag rnzaws/web:latest 702786411213.dkr.ecr.us-east-1.amazonaws.com/test:ebtest
       - docker push 702786411213.dkr.ecr.us-east-1.amazonaws.com/test:ebtest
       - docker tag rnzaws/processor:latest 702786411213.dkr.ecr.us-east-1.amazonaws.com/test:ebtest-processor
       - docker push 702786411213.dkr.ecr.us-east-1.amazonaws.com/test:ebtest-processor
-      - echo build completed on `date`
-  post_build:
-    commands:
-      - echo post build completed on `date`
-      - echo run some more tests
+      - echo post_build completed on `date`
 
 artifacts:
   files:
     - Dockerrun.aws.json
   discard-paths: 'yes'
   base-directory: ./
+

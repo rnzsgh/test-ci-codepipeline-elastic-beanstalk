@@ -5,7 +5,7 @@ FROM python:3.5-alpine
 ADD requirements.txt /requirements.txt
 
 RUN set -ex \
-    && apk add --no-cache --virtual .build-deps gcc make libc-dev musl-dev linux-headers pcre-dev postgresql-dev \
+    && apk add --no-cache --virtual .build-deps gcc make libc-dev musl-dev build-base python3-dev py-pip linux-headers pcre-dev postgresql-dev \
     && pyvenv /venv \
     && /venv/bin/pip install -U pip \
     && LIBRARY_PATH=/lib:/usr/lib /bin/sh -c "/venv/bin/pip install --no-cache-dir -r /requirements.txt" \

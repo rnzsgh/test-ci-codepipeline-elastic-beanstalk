@@ -1,6 +1,6 @@
 
 uwsgi==2.0.15
-Django==1.11.21
+Django>=1.11.21
 redis==2.10.5
 django-redis==4.8.0
 gunicorn==19.7.1
